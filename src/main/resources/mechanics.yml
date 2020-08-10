@@ -39,6 +39,10 @@ lifeleech:
 energyblast:
   enabled: true
 
+titanicshock:
+  enabled: true
+
+
 
 # FARMING
 

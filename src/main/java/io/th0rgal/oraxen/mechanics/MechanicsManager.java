@@ -18,6 +18,7 @@ import io.th0rgal.oraxen.mechanics.provided.skinnable.SkinnableMechanicFactory;
 import io.th0rgal.oraxen.mechanics.provided.smelting.SmeltingMechanicFactory;
 import io.th0rgal.oraxen.mechanics.provided.soulbound.SoulBoundMechanicFactory;
 import io.th0rgal.oraxen.mechanics.provided.thor.ThorMechanicFactory;
+import io.th0rgal.oraxen.mechanics.provided.titanicshock.TitanicShockMechanicFactory;
 import io.th0rgal.oraxen.settings.ResourcesManager;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
@@ -53,6 +54,7 @@ public class MechanicsManager {
         registerMechanicFactory("thor", ThorMechanicFactory.class);
         registerMechanicFactory("lifeleech", LifeLeechMechanicFactory.class);
         registerMechanicFactory("energyblast", EnergyBlastMechanicFactory.class);
+        registerMechanicFactory("titanicshock", TitanicShockMechanicFactory.class);
 
         //farming
         registerMechanicFactory("bigmining", BigMiningMechanicFactory.class);
