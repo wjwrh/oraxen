@@ -17,9 +17,11 @@ public class BlockMechanicFactory extends MechanicFactory {
 
     private static final List<JsonObject> MUSHROOM_STEM_BLOCKSTATE_OVERRIDES = new ArrayList<>();
     private static final Map<Integer, BlockMechanic> BLOCK_PER_VARIATION = new HashMap<>();
+    private static BlockMechanicFactory instance;
 
     public BlockMechanicFactory(ConfigurationSection section) {
         super(section);
+        instance = this;
         // this modifier should be executed when all the items have been parsed, just before zipping the pack
         ResourcePack.addModifiers(packFolder -> {
             File blockstatesFolder = new File(packFolder, "blockstates");
@@ -65,4 +67,7 @@ public class BlockMechanicFactory extends MechanicFactory {
         return  BLOCK_PER_VARIATION.get(customVariation);
     }
 
+    public static BlockMechanicFactory get() {
+        return instance;
+    }
 }

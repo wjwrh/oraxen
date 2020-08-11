@@ -7,13 +7,12 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
 import io.th0rgal.oraxen.compatibilities.CompatibilityProvider;
-
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 public class WorldGuardCompatibility extends CompatibilityProvider<WorldGuardPlugin> {
 
-    public boolean canBreak(Player player, Block block){
+    public boolean canBreak(Player player, Block block) {
         LocalPlayer localPlayer = plugin.wrapPlayer(player);
         RegionQuery query = WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery();
         boolean canBypass = WorldGuard.getInstance().getPlatform().getSessionManager().hasBypass(localPlayer, BukkitAdapter.adapt(player.getWorld()));

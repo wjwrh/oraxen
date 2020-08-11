@@ -2,6 +2,7 @@ package io.th0rgal.oraxen.compatibilities;
 
 import io.th0rgal.oraxen.compatibilities.provided.bossshoppro.BossShopProCompatibility;
 import io.th0rgal.oraxen.compatibilities.provided.cratereloaded.CrateReloadedCompatibility;
+import io.th0rgal.oraxen.compatibilities.provided.mines.MinesCompatibility;
 import io.th0rgal.oraxen.compatibilities.provided.mythicmobs.MythicMobsCompatibility;
 import io.th0rgal.oraxen.compatibilities.provided.worldguard.WorldGuardCompatibility;
 import io.th0rgal.oraxen.settings.Message;
@@ -21,6 +22,7 @@ public class CompatibilitiesManager {
         addCompatibility("CrateReloaded", CrateReloadedCompatibility.class, true);
         addCompatibility("BossShopPro", BossShopProCompatibility.class, true);
         addCompatibility("WorldGuard", WorldGuardCompatibility.class, true);
+        addCompatibility("Mines", MinesCompatibility.class, true);
     }
 
     public static void disableCompatibilities() {
@@ -30,10 +32,10 @@ public class CompatibilitiesManager {
     public static boolean enableCompatibility(String pluginName) {
         try {
             if (!ACTIVE_COMPATIBILITY_PROVIDERS.containsKey(pluginName) && COMPATIBILITY_PROVIDERS.containsKey(pluginName) && Bukkit.getPluginManager().isPluginEnabled(pluginName)) {
+                Message.PLUGIN_HOOKS.log(pluginName);
                 CompatibilityProvider<?> compatibilityProvider = COMPATIBILITY_PROVIDERS.get(pluginName).getDeclaredConstructor().newInstance();
                 compatibilityProvider.enable(pluginName);
                 ACTIVE_COMPATIBILITY_PROVIDERS.put(pluginName, compatibilityProvider);
-                Message.PLUGIN_HOOKS.log(pluginName);
                 return true;
             }
         } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
@@ -47,10 +49,10 @@ public class CompatibilitiesManager {
         try {
             if (!ACTIVE_COMPATIBILITY_PROVIDERS.containsKey(pluginName))
                 return false;
+            Message.PLUGIN_UNHOOKS.log(pluginName);
             if (ACTIVE_COMPATIBILITY_PROVIDERS.get(pluginName).isEnabled())
                 ACTIVE_COMPATIBILITY_PROVIDERS.get(pluginName).disable();
             ACTIVE_COMPATIBILITY_PROVIDERS.remove(pluginName);
-            Message.PLUGIN_UNHOOKS.log(pluginName);
             return true;
         } catch (Exception e) {
             e.printStackTrace();

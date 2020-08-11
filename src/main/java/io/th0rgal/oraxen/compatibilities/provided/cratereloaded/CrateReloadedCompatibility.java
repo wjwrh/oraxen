@@ -17,8 +17,10 @@ import java.util.List;
 
 public class CrateReloadedCompatibility extends CompatibilityProvider<CratePlugin> {
 
-    public CrateReloadedCompatibility() {
-        super();
+
+    @Override
+    public void enable(String pluginName) {
+        super.enable(pluginName);
         try {
             registerItems();
         } catch (Exception e) {
