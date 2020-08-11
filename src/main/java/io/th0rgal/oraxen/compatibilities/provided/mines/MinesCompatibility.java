@@ -10,7 +10,6 @@ import io.th0rgal.oraxen.mechanics.provided.block.BlockMechanicFactory;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
-import org.bukkit.material.MaterialData;
 
 public class MinesCompatibility extends CompatibilityProvider<Mines> {
 
@@ -36,7 +35,7 @@ public class MinesCompatibility extends CompatibilityProvider<Mines> {
                 String[] split = line.split(";");
                 if (BlockMechanicFactory.get().isNotImplementedIn(split[0]))
                     continue;
-                MaterialData materialData = Bukkit.getUnsafe().toLegacy(Material.MUSHROOM_STEM).getNewData((byte) 0);
+                org.bukkit.material.MaterialData materialData = Bukkit.getUnsafe().toLegacy(Material.MUSHROOM_STEM).getNewData((byte) 0);
                 //MaterialData materialData = new MaterialData(Material.MUSHROOM_STEM);
                 int customVariation = ((BlockMechanic) BlockMechanicFactory.get().getMechanic(split[0])).getCustomVariation();
                 materialData.setData((byte) customVariation);
